@@ -1,39 +1,34 @@
+from sys import argv
 from PIL import Image
 
-im = Image.open('temp.png').convert('RGBa')
-w, h = im.size
 
-def makeString(original):
-    ori = hex(int(original, 2))[2:]
-    ori = ori[::-1]
-    while len(ori) < w/4:
-        ori += "0"
-    ori = ori[::-1]
-    return ori
+class LogoConverter:
+    def __init__(self, img_path):
+        self.source_image = Image.open(img_path).convert('RGBa')
+        self.width, self.height = self.source_image.size
 
-def calcArray(array):
-    hexArray = []
-    
-    for y in range(h):
-        binString = ""
-        for x in range(w):
-            binString += array[x][y]
-        hexArray.append(makeString(binString))
-    return hexArray
+    def binary_array_to_hex_array(self, binary_array):
+        hex_array = []
+        for line in binary_array:
+            hex_string = hex(int(line, 2))[2:]
+            hex_array.append(hex_string.zfill(int(self.width/4)))
+        return hex_array
 
-def getImage():
-    array = [["0"]*w for i in range(h)]
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = im.getpixel((x, y))
-            if a > 200:
-                array[x][y] = "1"
-    hexArray = calcArray(array)
-    return hexArray
-    
-def execute():
-    image = getImage()
-    for px in image:
-        print(px)
+    def black_pixels_to_array(self):
+        pixel_array = []
+        for y in range(self.height):
+            pixel_array.append('')
+            for x in range(self.width):
+                _, _, _, a = self.source_image.getpixel((x, y))
+                pixel_array[y] += str(int(a > 200))
+        return pixel_array
 
-execute()
+    def convert_image(self):
+        pixel_array = self.black_pixels_to_array()
+        return self.binary_array_to_hex_array(pixel_array)
+
+
+if __name__ == '__main__':
+    converter = LogoConverter(argv[1])
+    for line in converter.convert_image():
+        print(line)
