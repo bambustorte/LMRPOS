@@ -1,5 +1,7 @@
-import connector.PrinterConnector;
-import connector.TouchscreenConnector;
+package de.lmr;
+
+import de.lmr.connector.PrinterConnector;
+import de.lmr.connector.TouchscreenConnector;
 
 public class Starter {
 

@@ -1,4 +1,4 @@
-package connector;
+package de.lmr.connector;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package connector;
+package de.lmr.connector;
 
 import java.io.FileInputStream;
 import java.io.IOException;
