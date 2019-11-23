@@ -71,7 +71,7 @@ public class PrinterConnector {
     public void write(byte[] bytes){
         try {
             out.write(bytes);
-        }catch (Exception e){
+        } catch (Exception e){
             System.err.println("Failed to send data to printer!");
             e.printStackTrace();}
     }
@@ -133,8 +133,8 @@ public class PrinterConnector {
         write(hexStringToByteArray("1B07029B"));
         write(hexStringToByteArray("1B0702A0"));
         write(hexStringToByteArray("1B0705A2"));
-//        connector.write(connector.hexStringToByteArray("1B0702A4"));
-//        connector.write(connector.hexStringToByteArray("1B0702A2"));
+        //        connector.write(connector.hexStringToByteArray("1B0702A4"));
+        //        connector.write(connector.hexStringToByteArray("1B0702A2"));
         write(hexStringToByteArray("1B0702A0"));
         write(hexStringToByteArray("1B07029B"));
         write(hexStringToByteArray("1B070599"));
@@ -155,8 +155,8 @@ public class PrinterConnector {
         write(hexStringToByteArray("1D2A084848" + data));
     }
 
-    public void printLogo(int logoNumber){
-        write(hexStringToByteArray("1D2F000" + logoNumber));
+    public void printLogo(int logoNumber, int size){
+        write(hexStringToByteArray("1D2F0" + size + "0" + logoNumber));
     }
 
     public void printLogo(int a, int b, String data){

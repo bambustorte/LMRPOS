@@ -34,7 +34,7 @@ public class TouchscreenConnector implements Runnable {
 
                 System.out.println("opening cash drawer");
 
-//                printer.openCashDrawer((byte)0,(byte)100,(byte)50);
+                //                printer.openCashDrawer((byte)0,(byte)100,(byte)50);
             } catch (IOException e) {
                 e.printStackTrace();
             }
